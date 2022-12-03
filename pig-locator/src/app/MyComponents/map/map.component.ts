@@ -53,4 +53,9 @@ export class MapComponent implements AfterViewInit {
 
   }
 
+  // public addMarker(lat: number, lng: number, name: string): void {
+  //   L.marker([lat, lng]).addTo(this.map)
+  //   .bindPopup("<b>" + name + "</b><br />cases reported.").openPopup();
+  // }
+
 }
