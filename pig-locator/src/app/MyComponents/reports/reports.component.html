@@ -5,11 +5,15 @@
       <th>Reported By</th>
       <th>Time Reported</th>
       <th>Status</th>
+      <th></th>
+      <th></th>
+      <th></th>
+
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let report of reports">
-      <td>{{report.location}}</td>
+      <td>{{report.location.name}}</td>
       <td>{{report.reporterFirstName}}</td>
       <td>{{report.dateNtime}}</td>
       <td>{{report.status}}</td>
@@ -25,3 +29,4 @@
     </tr>
   </tbody>
 </table>
+<app-password-popup [changeStatus]="statusChange.asObservable()"></app-password-popup>

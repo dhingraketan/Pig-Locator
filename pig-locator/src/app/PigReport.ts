@@ -1,6 +1,6 @@
 import { Locaion } from "./Location";
 
-enum Status {
+export enum Status {
   ready = "READY FOR PICKUP",
   retrieved = "RETRIEVED"
 }
@@ -29,7 +29,11 @@ export class PigReport {
   }
 
 
-  public pickedUp() {
-    this.status = Status.retrieved;
-  }
+  // public toogleStatus(): void {
+  //   if (this.status == Status.ready) {
+  //     this.status = Status.retrieved;
+  //   } else {
+  //     this.status = Status.ready;
+  //   }
+  // }
 }
