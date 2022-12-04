@@ -1,3 +1,4 @@
+<app-map></app-map>
 <table class="content-table">
   <thead>
     <tr>
@@ -15,10 +16,10 @@
     <tr *ngFor="let report of reports">
       <td>{{report.location.name}}</td>
       <td>{{report.reporterFirstName}}</td>
-      <td>{{report.dateNtime}}</td>
+      <td>{{formDate(report.dateNtime)}}</td>
       <td>{{report.status}}</td>
       <td>
-        <button class="btn btn-primary" (click)="viewReport(report)">More Info</button>
+        <button class="btn btn-primary" [routerLink]="['report-info']" [state]="{report}">More Info</button>
       </td>
       <td>
         <button class="btn btn-primary" (click)="changeStatus(report)">change Status</button>

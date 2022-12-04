@@ -41,7 +41,6 @@ export class PasswordPopupComponent implements OnInit {
 
   onSubmit(){
     this.formModal.hide();
-    console.log(this.entered);
     this.verifyPassword();
   }
 

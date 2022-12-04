@@ -1,0 +1,55 @@
+<table class="content-table">
+  <thead>
+    <tr>
+      <th>Pig id: "{{report.pid}}" Report Info</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>First Name:</td>
+      <td>{{report.reporterFirstName}}</td>
+    </tr>
+    <tr>
+      <td>Last Name:</td>
+      <td>{{report.reporterLastName}}</td>
+    </tr>
+    <tr>
+      <td>Phone Number:</td>
+      <td>{{report.reporterPhone}}</td>
+    </tr>
+    <tr>
+      <td>Pig Breed:</td>
+      <td>{{report.breed}}</td>
+    </tr>
+    <tr>
+      <td>Report Date:</td>
+      <td>{{date}}</td>
+    </tr>
+    <tr>
+      <td>Report Time:</td>
+      <td>{{time}}</td>
+    </tr>
+    <tr>
+      <td>Report Status:</td>
+      <td>{{report.status}}</td>
+    </tr>
+    <tr>
+      <td>Location:</td>
+      <td>{{report.location.name}}</td>
+    </tr>
+    <tr>
+      <td>Lng:</td>
+      <td>{{report.location.lng}}</td>
+    </tr>
+    <tr>
+      <td>Lat:</td>
+      <td>{{report.location.lat}}</td>
+    </tr>
+    <tr>
+      <td>Notes:</td>
+      <td>{{report.notes}}</td>
+    </tr>
+  </tbody>
+</table>
+<button class="btn btn-primary my-3" routerLink="">Home</button>

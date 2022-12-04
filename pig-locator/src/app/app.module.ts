@@ -10,13 +10,15 @@ import { ReportsComponent } from './MyComponents/reports/reports.component';
 import { PasswordPopupComponent } from './MyComponents/password-popup/password-popup.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ReportInfoComponent } from './MyComponents/report-info/report-info.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MapComponent,
     ReportsComponent,
-    PasswordPopupComponent
+    PasswordPopupComponent,
+    ReportInfoComponent
   ],
   imports: [
     BrowserModule,

@@ -1,6 +1,7 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { formatDate } from '@angular/common';
+import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
-import { PigReport, Status } from 'src/app/PigReport';
+import { PigReport } from 'src/app/PigReport';
 
 @Component({
   selector: 'app-reports',
@@ -14,14 +15,21 @@ export class ReportsComponent implements OnInit {
   statusChange: Subject<void> = new Subject<void>();
   statusDelete: Subject<void> = new Subject<void>();
 
+
   constructor() {
     this.reports = [
-      new PigReport("John", "Doe", "1234567890", 1234567890, "Breed", { name: "Burn", lat: 0, lng: 0 }, "Notes")
+      new PigReport("John", "Doe", "1234567890", 1234567890, "Breed", { name: "Burn", lat: 0, lng: 0 }, "Notes"),
+      new PigReport("Jane", "Doe", "0987654321", 1234567890, "Breed", { name: "Burn", lat: 0, lng: 0 }, "Notes")
     ];
 
   }
 
   ngOnInit(): void {
+  }
+
+  viewReportInfo(report: PigReport) {
+    const index = this.reports.indexOf(report);
+
   }
 
   changeStatus(report: PigReport) {
@@ -36,10 +44,6 @@ export class ReportsComponent implements OnInit {
     this.statusDelete.next();
   }
 
-  viewReport(report: PigReport) {
-
-  }
-
   continueAciton(passed: boolean) {
     if (passed) {
       if (this.inAction[1]) {
@@ -50,6 +54,10 @@ export class ReportsComponent implements OnInit {
     } else {
       alert("Wrong password");
     }
+  }
+
+  formDate(date: Date): string {
+    return formatDate(date, 'MMMM d, y, hh:mm:ss a', 'en-US');
   }
 }
 
