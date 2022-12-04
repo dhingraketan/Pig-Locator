@@ -7,16 +7,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MapComponent } from './MyComponents/map/map.component';
 import { ReportsComponent } from './MyComponents/reports/reports.component';
-import { PasswordApiComponent } from './MyComponents/password-api/password-api.component';
 import { PasswordPopupComponent } from './MyComponents/password-popup/password-popup.component';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
     MapComponent,
     ReportsComponent,
-    PasswordApiComponent,
     PasswordPopupComponent
   ],
   imports: [
@@ -24,7 +23,8 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatDialogModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

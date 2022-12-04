@@ -9,51 +9,52 @@ import { PigReport, Status } from 'src/app/PigReport';
 })
 export class ReportsComponent implements OnInit {
 
+  inAction!: [idx: number, delAction: boolean];
   reports!: PigReport[];
   statusChange: Subject<void> = new Subject<void>();
-  
+  statusDelete: Subject<void> = new Subject<void>();
+
   constructor() {
-
     this.reports = [
-      {
-        reporterFirstName: "John",
-        reporterLastName: "Doe",
-        reporterPhone: "123456789",
-        pid: 12,
-        breed: "Pig",
-        location: 
-        {
-          name: "Tel Aviv",
-          lat: 32.0853,
-          lng: 34.7818
-        },
-        dateNtime: new Date(),
-        status: Status.ready,
-        notes: "This is a note"
+      new PigReport("John", "Doe", "1234567890", 1234567890, "Breed", { name: "Burn", lat: 0, lng: 0 }, "Notes")
+    ];
 
-      }
-    ];   
-   
   }
 
   ngOnInit(): void {
   }
 
-  changeStatus(report: PigReport){
+  changeStatus(report: PigReport) {
+    const index = this.reports.indexOf(report);
+    this.inAction = [index, false];
     this.statusChange.next();
+  }
+
+  deleteReport(report: PigReport) {
     const index = this.reports.indexOf(report);
-    // this.reports[index].toogleStatus();
+    this.inAction = [index, true];
+    this.statusDelete.next();
   }
 
-  deleteReport(report: PigReport){
-    const index = this.reports.indexOf(report);
-    this.reports.splice(index, 1);
-  }
-
-  viewReport(report: PigReport){
+  viewReport(report: PigReport) {
 
   }
 
+  continueAciton(passed: boolean) {
+    if (passed) {
+      if (this.inAction[1]) {
+        this.reports.splice(this.inAction[0], 1);
+      } else {
+        this.reports[this.inAction[0]].toogleStatus();
+      }
+    } else {
+      alert("Wrong password");
+    }
+  }
 }
+
+
+
+
 
 

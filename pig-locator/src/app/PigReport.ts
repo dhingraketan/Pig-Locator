@@ -29,11 +29,11 @@ export class PigReport {
   }
 
 
-  // public toogleStatus(): void {
-  //   if (this.status == Status.ready) {
-  //     this.status = Status.retrieved;
-  //   } else {
-  //     this.status = Status.ready;
-  //   }
-  // }
+  public toogleStatus(): void {
+    if (this.status == Status.ready) {
+      this.status = Status.retrieved;
+    } else {
+      this.status = Status.ready;
+    }
+  }
 }
