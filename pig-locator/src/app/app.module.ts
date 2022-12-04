@@ -11,6 +11,7 @@ import { PasswordPopupComponent } from './MyComponents/password-popup/password-p
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ReportInfoComponent } from './MyComponents/report-info/report-info.component';
+import { HeaderComponent } from './MyComponents/header/header.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ReportInfoComponent } from './MyComponents/report-info/report-info.comp
     MapComponent,
     ReportsComponent,
     PasswordPopupComponent,
-    ReportInfoComponent
+    ReportInfoComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

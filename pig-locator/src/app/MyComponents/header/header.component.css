@@ -1,0 +1,38 @@
+body {
+  font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(45deg, #ea4f4c 0%, #6d0019 100%);
+}
+
+.logoWrapper {
+  display: flex;
+  padding-left: 10px;
+  font-size: xx-large;
+}
+
+.stylish {
+  font-weight: bold;
+}
+
+.logo {
+  padding-left: 4px;
+  color: #ea4f4c;
+}
+.navigationWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #222;
+  box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.25);
+  color: white;
+  text-transform: uppercase;
+  overflow: hidden;
+  height: 100px;
+}
