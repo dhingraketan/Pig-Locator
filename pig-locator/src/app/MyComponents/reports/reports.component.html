@@ -31,5 +31,7 @@
   </tbody>
 </table>
 
+<button class="btn btn-primary mx-3" routerLink="create-report">Create New Report</button>
+
 <app-password-popup [changeStatus]="statusChange.asObservable()" [deleteStatus]="statusDelete.asObservable()"
   (passwordCheck)="continueAciton($event)"></app-password-popup>

@@ -12,6 +12,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ReportInfoComponent } from './MyComponents/report-info/report-info.component';
 import { HeaderComponent } from './MyComponents/header/header.component';
+import { CreateReportComponent } from './MyComponents/create-report/create-report.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { HeaderComponent } from './MyComponents/header/header.component';
     ReportsComponent,
     PasswordPopupComponent,
     ReportInfoComponent,
-    HeaderComponent
+    HeaderComponent,
+    CreateReportComponent
   ],
   imports: [
     BrowserModule,

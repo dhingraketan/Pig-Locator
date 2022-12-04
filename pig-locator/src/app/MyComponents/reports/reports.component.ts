@@ -12,6 +12,7 @@ export class ReportsComponent implements OnInit {
 
   inAction!: [idx: number, delAction: boolean];
   reports!: PigReport[];
+  locations!: (loc: Location, numCases: number)=> [];
   statusChange: Subject<void> = new Subject<void>();
   statusDelete: Subject<void> = new Subject<void>();
 
