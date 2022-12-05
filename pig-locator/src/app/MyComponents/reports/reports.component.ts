@@ -28,11 +28,6 @@ export class ReportsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  viewReportInfo(report: PigReport) {
-    const index = this.reports.indexOf(report);
-
-  }
-
   changeStatus(report: PigReport) {
     const index = this.reports.indexOf(report);
     this.inAction = [index, false];

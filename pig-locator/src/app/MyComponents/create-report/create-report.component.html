@@ -18,19 +18,19 @@
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet"> 
 
 <div class="container">
-  <form (ngSubmit)="onSubmit()">
+  <form>
     <p>Create New Report</p>
-    <input type="text" [(ngModel)]="fName" placeholder="First Name">
-    <input type="text" [(ngModel)]="lName" placeholder="Last Name">
-    <input type="text" [(ngModel)]="phone" placeholder="Phone Number"><br>
-    <input type="number" [(ngModel)]="pid" placeholder="Pig ID">
-    <input type="text" [(ngModel)]="breed" placeholder="Breed"><br>
-    <input type="text" [(ngModel)]="locName" placeholder="Location">
-    <input type="number" [(ngModel)]="lng" placeholder="Longitude">
-    <input type="number" [(ngModel)]="lName" placeholder="Latitude"><br>
-    <input type="text" [(ngModel)]="fName" placeholder="Notes"><br>
+    <input type="text" [(ngModel)]="fName" [ngModelOptions]="{standalone: true}" placeholder="First Name">
+    <input type="text" [(ngModel)]="lName" [ngModelOptions]="{standalone: true}" placeholder="Last Name">
+    <input type="text" [(ngModel)]="phone" [ngModelOptions]="{standalone: true}" placeholder="Phone Number"><br>
+    <input type="number" [(ngModel)]="pid" [ngModelOptions]="{standalone: true}" placeholder="Pig ID">
+    <input type="text" [(ngModel)]="breed" [ngModelOptions]="{standalone: true}" placeholder="Breed"><br>
+    <input type="text" [(ngModel)]="locName" [ngModelOptions]="{standalone: true}" placeholder="Location">
+    <input type="number" [(ngModel)]="lng" [ngModelOptions]="{standalone: true}" placeholder="Longitude">
+    <input type="number" [(ngModel)]="lat" [ngModelOptions]="{standalone: true}" placeholder="Latitude"><br>
+    <input type="text" [(ngModel)]="notes" [ngModelOptions]="{standalone: true}" placeholder="Notes"><br>
 
-    <button type="submit" class="btn btn-primary">Submit Report</button>
+    <button type="submit" class="btn btn-primary" routerLink="" (click)="onSubmit()">Submit Report</button>
   </form>
 
   <div class="drops">
