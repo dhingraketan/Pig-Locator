@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Locaion } from 'src/app/Location';
+import { Location } from 'src/app/Location';
 import { PigReport } from 'src/app/PigReport';
 import * as uuid from 'uuid';
 
@@ -22,7 +22,7 @@ export class CreateReportComponent implements OnInit {
   notes!: string;
 
   report!: PigReport;
-  loc!: Locaion;
+  loc!: Location;
 
   constructor(private http: HttpClient) { }
 
@@ -32,7 +32,7 @@ export class CreateReportComponent implements OnInit {
 
   onSubmit() {
     
-    this.loc = new Locaion(this.locName, this.lng, this.lat);
+    this.loc = new Location(this.locName, this.lng, this.lat);
     this.report = new PigReport(this.fName, this.lName, this.phone, this.pid, this.breed, this.loc, this.notes);
     console.log(JSON.stringify(this.report.dateNtime));
     var key = JSON.stringify(this.report.dateNtime);

@@ -1,4 +1,4 @@
-import { Locaion } from "./Location";
+import { Location } from "./Location";
 
 export enum Status {
   ready = "READY FOR PICKUP",
@@ -11,12 +11,12 @@ export class PigReport {
   reporterPhone!: string;
   pid!: number;
   breed!: string;
-  location!: Locaion;
+  location!: Location;
   dateNtime!: Date;
   status!: Status;
   notes!: string;
 
-  constructor(reporterFirstName: string, reporterLastName: string, reporterPhone: string, pid: number, breed: string, location: Locaion, notes: string) {
+  constructor(reporterFirstName: string, reporterLastName: string, reporterPhone: string, pid: number, breed: string, location: Location, notes: string) {
     this.reporterFirstName = reporterFirstName;
     this.reporterLastName = reporterLastName;
     this.reporterPhone = reporterPhone;

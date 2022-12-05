@@ -1,4 +1,4 @@
-export class Locaion {
+export class Location {
   name!: string;
   lng!: number;
   lat!: number;

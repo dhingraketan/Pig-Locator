@@ -3,6 +3,9 @@ import * as L from 'leaflet';
 
 // need to add to make leaflet icons work
 import { icon, Marker } from 'leaflet';
+import { PopulateMapService } from 'src/app/Services/populate-map.service';
+import { LocInfo } from 'src/app/LocInfo';
+
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
 const shadowUrl = 'assets/marker-shadow.png';
@@ -26,8 +29,9 @@ Marker.prototype.options.icon = iconDefault;
 })
 export class MapComponent implements AfterViewInit {
   private map!: L.Map;
+  public locArray!: LocInfo[];
 
-  constructor() { }
+  constructor(private populateMapService: PopulateMapService) { }
 
   ngAfterViewInit(): void { 
     this.map = L.map('mapid').setView([49.2, -123], 11);
@@ -41,11 +45,18 @@ export class MapComponent implements AfterViewInit {
       zoomOffset: -1
     }).addTo(this.map);
 
-    L.marker([49.2276, -123.0076]).addTo(this.map)
-    .bindPopup("<b>Metrotown</b><br />cases reported.").openPopup();
+    this.locArray = this.populateMapService.locArr;
+    
+    for (let loc of this.locArray) {
+      L.marker([loc.location.lat, loc.location.lng]).addTo(this.map)
+        .bindPopup("<b>" + loc.location.name + "</b><br />" + loc.numCases + " case(s) reported.")
+        .openPopup();
+    }
+    // L.marker([49.2276, -123.0076]).addTo(this.map)
+    // .bindPopup("<b>Metrotown</b><br />cases reported.").openPopup();
 
-    L.marker([49.1867, -122.8490]).addTo(this.map)
-    .bindPopup("<b>SFU Surrey</b><br />cases reported.").openPopup();
+    // L.marker([49.1867, -122.8490]).addTo(this.map)
+    // .bindPopup("<b>SFU Surrey</b><br />cases reported.").openPopup();
 
     // this.map.on('click', (e) => {
     //   console.log(e.latlng);
