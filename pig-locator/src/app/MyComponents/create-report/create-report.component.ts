@@ -60,7 +60,7 @@ export class CreateReportComponent implements OnInit {
       data: data,
     };
 
-    this.http.post('https://272.selfip.net/apps/ePH24mDixT/collections/report/documents/', body)
+    this.http.post('https://272.selfip.net/apps/ePH24mDixT/collections/reports/documents/', body)
     .subscribe((response) => {
       console.log(response);
     });

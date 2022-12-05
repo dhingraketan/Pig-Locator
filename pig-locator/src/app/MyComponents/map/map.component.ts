@@ -1,10 +1,13 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, Input } from '@angular/core';
 import * as L from 'leaflet';
 
 // need to add to make leaflet icons work
 import { icon, Marker } from 'leaflet';
 import { PopulateMapService } from 'src/app/Services/populate-map.service';
 import { LocInfo } from 'src/app/LocInfo';
+import { PigReport } from 'src/app/PigReport';
+import { HttpClient } from '@angular/common/http';
+import { Location } from 'src/app/Location';
 
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
@@ -18,7 +21,7 @@ const iconDefault = icon({
   popupAnchor: [1, -34],
   tooltipAnchor: [16, -28],
   shadowSize: [41, 41]
-}); 
+});
 Marker.prototype.options.icon = iconDefault;
 
 
@@ -29,11 +32,12 @@ Marker.prototype.options.icon = iconDefault;
 })
 export class MapComponent implements AfterViewInit {
   private map!: L.Map;
-  public locArray!: LocInfo[];
+  locArray!: LocInfo[];
+  rprts!: PigReport[];
 
-  constructor(private populateMapService: PopulateMapService) { }
+  constructor(private http: HttpClient) { }
 
-  ngAfterViewInit(): void { 
+  ngAfterViewInit(): void {
     this.map = L.map('mapid').setView([49.2, -123], 11);
 
     L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZGhpbmdyYWtldGFuc2Z1IiwiYSI6ImNsYjV4bWFjMjA2ZDUzcW82a3QzOTB4NjMifQ.TR8tcySmnYerWOa680kc4w', {
@@ -45,28 +49,38 @@ export class MapComponent implements AfterViewInit {
       zoomOffset: -1
     }).addTo(this.map);
 
-    this.locArray = this.populateMapService.locArr;
+    this.getPigReports();
+
     
+  }
+
+  getPigReports() {
+    this.rprts = [];
+    this.http.get('https://272.selfip.net/apps/ePH24mDixT/collections/reports/documents/', { responseType: 'json' }).subscribe((data: any) => {
+      for (let report of data) {
+        this.rprts.push(new PigReport(report.data.firstName, report.data.lastName, report.data.phoneNumber, report.data.pid, report.data.breed, new Location(report.data.locationName, report.data.lng, report.data.lat), report.data.extraNotes, report.data.status, report.data.dateNtime));
+      }
+
+      this.populateLocInfo();
+      
+    });
+
+  }
+
+  populateLocInfo() {
+    this.locArray = [];
+    for (let report of this.rprts) {
+      if (this.locArray.find(locInfo => locInfo.location.name === report.location.name)) {
+        this.locArray.find(locInfo => locInfo.location.name === report.location.name)!.numCases++;
+      } else {
+        this.locArray.push(new LocInfo(report.location, 1));
+      }
+    }
+
     for (let loc of this.locArray) {
       L.marker([loc.location.lat, loc.location.lng]).addTo(this.map)
         .bindPopup("<b>" + loc.location.name + "</b><br />" + loc.numCases + " case(s) reported.")
         .openPopup();
     }
-    // L.marker([49.2276, -123.0076]).addTo(this.map)
-    // .bindPopup("<b>Metrotown</b><br />cases reported.").openPopup();
-
-    // L.marker([49.1867, -122.8490]).addTo(this.map)
-    // .bindPopup("<b>SFU Surrey</b><br />cases reported.").openPopup();
-
-    // this.map.on('click', (e) => {
-    //   console.log(e.latlng);
-    // });
-
   }
-
-  // public addMarker(lat: number, lng: number, name: string): void {
-  //   L.marker([lat, lng]).addTo(this.map)
-  //   .bindPopup("<b>" + name + "</b><br />cases reported.").openPopup();
-  // }
-
 }

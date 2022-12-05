@@ -1,10 +1,11 @@
 import { formatDate } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
-import { Subject } from 'rxjs';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { delay, Subject } from 'rxjs';
 import { PigReport } from 'src/app/PigReport';
 import { Location } from 'src/app/Location';
 import { LocInfo } from 'src/app/LocInfo';
 import { PopulateMapService } from 'src/app/Services/populate-map.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-reports',
@@ -20,18 +21,22 @@ export class ReportsComponent implements OnInit {
   statusDelete: Subject<void> = new Subject<void>();
 
 
-  constructor(private populateMapService: PopulateMapService) {
-    this.reports = [
-      new PigReport("John", "Doe", "1234567890", 1234567890, "Breed", { name: "SFU Surrey", lat: 49.1867, lng: -122.8490 }, "Notes"),
-      new PigReport("Jane", "Doe", "1234567890", 1234567890, "Breed", { name: "VANCOUVER", lat: 49.2567, lng: -123.1 }, "Notes")
-    ];
+  constructor(private http: HttpClient) { }
 
+
+  ngOnInit() {
+    this.getPigReports();
   }
 
-  ngOnInit(): void {
-    //populate reports
-    this.populateLocInfo();
-    this.populateMapService.locArr = this.locInfos;
+  getPigReports() {
+    this.reports = [];
+    this.http.get('https://272.selfip.net/apps/ePH24mDixT/collections/reports/documents/', { responseType: 'json' }).subscribe((data: any) => {
+      for (let report of data) {
+        this.reports.push(new PigReport(report.data.firstName, report.data.lastName, report.data.phoneNumber, report.data.pid, report.data.breed, new Location(report.data.locationName, report.data.lng, report.data.lat), report.data.extraNotes, report.data.status, report.data.dateNtime));
+      }
+      
+    });
+
   }
 
   changeStatus(report: PigReport) {
@@ -62,16 +67,6 @@ export class ReportsComponent implements OnInit {
     return formatDate(date, 'MMMM d, y, hh:mm:ss a', 'en-US');
   }
 
-  populateLocInfo() {
-    this.locInfos = [];
-    for (let report of this.reports) {
-      if(this.locInfos.find(locInfo => locInfo.location.name === report.location.name)){
-        this.locInfos.find(locInfo => locInfo.location.name === report.location.name)!.numCases++;
-      } else {
-        this.locInfos.push(new LocInfo(report.location, 1));
-      }
-    }
-  }
 }
 
 

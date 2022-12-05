@@ -16,15 +16,25 @@ export class PigReport {
   status!: Status;
   notes!: string;
 
-  constructor(reporterFirstName: string, reporterLastName: string, reporterPhone: string, pid: number, breed: string, location: Location, notes: string) {
+  constructor(reporterFirstName: string, reporterLastName: string, reporterPhone: string, pid: number, breed: string, location: Location, notes: string, status?: Status, dateNtime?: Date) {
     this.reporterFirstName = reporterFirstName;
     this.reporterLastName = reporterLastName;
     this.reporterPhone = reporterPhone;
     this.pid = pid;
     this.breed = breed;
     this.location = location;
-    this.dateNtime = new Date();
-    this.status = Status.ready;
+    if(dateNtime == undefined) {
+      this.dateNtime = new Date();
+    } else {
+      this.dateNtime = dateNtime;
+    }
+
+    if(status == undefined) {
+      this.status = Status.ready;
+    } else {
+      this.status = status;
+    }
+    
     this.notes = notes;
   }
 
